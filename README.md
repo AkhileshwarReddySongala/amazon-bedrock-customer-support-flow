@@ -1,37 +1,30 @@
 # Purpose of This Repo
 
-This repo is meant to be used to keep things organized during content development and act as the source of truth for all projects and exercises related to this course.
+This repo is the source of truth for the course project **"Customer Support Chatbot with Amazon Bedrock AgentCore"** (Prompting for Effective LLM Reasoning). It contains the starter files students use to build the project.
+
+> **Note:** Bedrock *Agents Classic* was closed to new customers on July 30, 2026. This project runs on its successor, the **Amazon Bedrock AgentCore managed harness**, with tools exposed through an **AgentCore Gateway**. Bedrock Evaluations, which the project uses for testing, is unaffected.
 
 ## Folder Structure
 
-### Lesson Folder
-
-This repo contains a folder for each `lesson` and one `project` folder.
-
-Example
-```
-lesson-1-hello
-lesson-2-world
-lesson-3-foo
-lesson-4-bar
-project
-```
-
-Each `lesson` folder is named using the naming convention of `lesson-#-name-of-lesson`.
-
-Example
-```
-lesson-1-hello
-```
-
-Four lesson folders have been provided as a template; However, you may need to add more or possibly use less than four depending on what is needed.
-
-If you require an additional lesson folder, you can make a copy of the folder and paste it into the root directory.
-
-### Exercises Folder
-
-Each `lesson` folder contains an `exercises` folder. This `exercises` folder should contain all files and instructions necessary for the exercises along with the solution. The solutions for these exercises will be shared with students. See the `README` in the `exercises` folder for information about folder structure.
-
 ### Project Folder
 
-The `project` folder should contain all files and instructions necessary for setup. If possible, a set of instructions should be provided for both Udacity workspaces and a way to work locally (for both MacOS and Windows OS). At a minimum, one set of instructions should be provided. A `README` template has been provided in the project folder. This template layout should be used to write your README.
+The `project` folder contains all files and instructions necessary for the project:
+
+* `project/README.md` — the full project instructions (setup, building the harness, testing, cleanup).
+* `project/starter/` — the files students start from:
+  * CloudFormation templates for the bug-report tool (Lambda + DynamoDB + IAM roles) and the testing resources (S3 + evaluation role)
+  * Python setup scripts for the AgentCore resources (`setup_gateway.py`, `create_harness.py`), a chat client (`chat.py`), and cleanup (`cleanup_agentcore.py`)
+  * `system_prompt.txt` — the student's main deliverable
+  * the FAQ document, the evaluation-dataset generator, and a test-suite template
+
+The reference solution, rubric, and detailed docs (`docs/tools-setup.md`, `docs/testing.md`) live in the companion solution repo.
+
+### What students build
+
+1. Deploy the tool stack (CloudFormation) and create the gateway (`setup_gateway.py`).
+2. Design the system prompt: route each message to bug-report collection, FAQ answering, or a polite human hand-off; collect all bug details across a multi-turn session before filing a ticket with the `create_bug_report` tool.
+3. Create the harness (`create_harness.py`), iterate with `chat.py`.
+4. Test automatically: run a test suite through `generate-eval-dataset.py` and score the results with Bedrock Evaluations.
+5. Clean up all resources.
+
+All work happens in **us-east-1**, with the model pinned to `us.amazon.nova-pro-v1:0`.
