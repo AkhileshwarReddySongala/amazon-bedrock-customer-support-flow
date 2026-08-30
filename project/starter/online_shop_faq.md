@@ -108,6 +108,7 @@ Contact support from the email linked to your account. We’ll verify your reque
 
 29) How can I contact customer support?
 Use the help/contact form on our site (recommended) or reply to any order email. Include your order number for faster help.
+You can also call our support line at 1-800-555-0142, Monday-Friday.
 
 30) What are your support hours and response times?
 Support is available Monday–Friday (excluding holidays). We typically respond within 1–2 business days; urgent shipping/return issues are prioritized.
