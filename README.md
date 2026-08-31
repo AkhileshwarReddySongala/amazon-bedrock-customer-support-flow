@@ -79,6 +79,11 @@ The output went to S3 and through a Bedrock Evaluation job using
 
 **Correctness: 1.00 across all six prompts.**
 
+**See [`EVALUATION.md`](EVALUATION.md) for the full review of the evaluation
+results** — per-case scores, the judge's reasoning for each, and my observations,
+including one case where the 1.00 hides a partial match. Raw judge output is in
+`eval-results.jsonl`.
+
 ## Notes from building this
 
 **The reasoning traces are deliberate.** Nova Pro emits `<thinking>` blocks
@@ -111,6 +116,21 @@ for a whole conversation.
 support phone line, but `online_shop_faq.md` only listed a contact form and
 email. Rather than have the model invent a number, I added one to the FAQ
 (1-800-555-0142) so the answer stays grounded in the document.
+
+## Where to review this submission
+
+This project was built on the **AgentCore managed harness with prompt-based
+routing**, not Bedrock Agents Classic / Flows. The rubric refers to flow
+diagrams, Condition nodes, Output nodes and a FAQ Prompt node, none of which
+exist in this version of the project. Here is where to find the equivalent
+evidence for each criterion:
+
+| Rubric criterion | Where to review it |
+|---|---|
+| Classification and routing | `project/starter/system_prompt.txt` — the three routes and routing rules. Behaviour shown in `evidence/06-chat-platform-and-other-routes.png` and `evidence/07-chat-bug-report-tool-call.png`. There is no flow diagram or Condition node; routing is entirely prompt-based. |
+| Bug report path | `system_prompt.txt` (BUG_REPORT section and collection gate), `evidence/07-chat-bug-report-tool-call.png` for the `[tool call] bugreports___create_bug_report` line and returned ticket ID, `evidence/09-dynamodb-table-items.png` and `evidence/10-dynamodb-item-detail.png` for the stored records. |
+| Platform question and other paths | `evidence/06-chat-platform-and-other-routes.png` — FAQ-covered answer, FAQ-uncovered hand-off, and out-of-scope hand-off, both hand-offs giving the support phone number. The FAQ is embedded via the `{{FAQ}}` placeholder in `system_prompt.txt`, substituted by `create_harness.py`; there is no Prompt node to screenshot. |
+| Testing and evaluation | `project/starter/harness-tests.json` (the harness-era equivalent of `flow-tests.json`), `project/starter/output_eval_dataset.jsonl`, `evidence/08-bedrock-evaluation-correctness.png`, and the written observation in [`EVALUATION.md`](EVALUATION.md). |
 
 ## A note on the rubric
 
