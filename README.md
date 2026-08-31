@@ -130,7 +130,7 @@ evidence for each criterion:
 | Classification and routing | `project/starter/system_prompt.txt` — the three routes and routing rules. Behaviour shown in `evidence/06-chat-platform-and-other-routes.png` and `evidence/07-chat-bug-report-tool-call.png`. There is no flow diagram or Condition node; routing is entirely prompt-based. |
 | Bug report path | `system_prompt.txt` (BUG_REPORT section and collection gate), `evidence/07-chat-bug-report-tool-call.png` for the `[tool call] bugreports___create_bug_report` line and returned ticket ID, `evidence/09-dynamodb-table-items.png` and `evidence/10-dynamodb-item-detail.png` for the stored records. |
 | Platform question and other paths | `evidence/06-chat-platform-and-other-routes.png` — FAQ-covered answer, FAQ-uncovered hand-off, and out-of-scope hand-off, both hand-offs giving the support phone number. The FAQ is embedded via the `{{FAQ}}` placeholder in `system_prompt.txt`, substituted by `create_harness.py`; there is no Prompt node to screenshot. |
-| Testing and evaluation | `project/starter/harness-tests.json` (the harness-era equivalent of `flow-tests.json`), `project/starter/output_eval_dataset.jsonl`, `evidence/08-bedrock-evaluation-correctness.png`, and the written observation in [`EVALUATION.md`](EVALUATION.md). |
+| Testing and evaluation | `project/starter/harness-tests.json` (the harness-era equivalent of `flow-tests.json`), `project/starter/output_eval_dataset.jsonl`, `evidence/08-bedrock-evaluation-correctness.png`, the per-case judge output in `evidence/11-bedrock-evaluation-prompt-details-1.png` and `evidence/12-bedrock-evaluation-prompt-details-2.png`, and the written observation in [`EVALUATION.md`](EVALUATION.md). |
 
 ## A note on the rubric
 
