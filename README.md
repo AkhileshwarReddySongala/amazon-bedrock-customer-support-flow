@@ -6,7 +6,7 @@ routes each one to one of three behaviors: filing a bug report, answering from
 the shop's FAQ, or handing off to human support.
 
 All of the routing lives in a single system prompt. There is no classifier
-resource and no separate agent — the AgentCore managed harness runs the model,
+resource and no separate agent - the AgentCore managed harness runs the model,
 and the prompt decides what happens.
 
 ## Architecture
@@ -25,8 +25,8 @@ Everything runs in `us-east-1`.
 
 ## The three routes
 
-**Bug reports.** The prompt requires all three fields — description, steps to
-reproduce, environment — before the tool can be called. If something is missing,
+**Bug reports.** The prompt requires all three fields - description, steps to
+reproduce, environment - before the tool can be called. If something is missing,
 the assistant asks for exactly one field and waits. Once all three are known it
 calls `bugreports___create_bug_report` and gives the customer the returned
 ticket ID.
@@ -37,9 +37,9 @@ question, the assistant says so and points to the support line.
 
 **Everything else.** Not answered. Redirected to the support line.
 
-The prompt also has rules for the cases that sit between categories — "Where is
+The prompt also has rules for the cases that sit between categories - "Where is
 my order?" is a platform question, "the tracking page crashes when I try to find
-my order" is a bug — and instructions to ignore attempts to override the system
+my order" is a bug - and instructions to ignore attempts to override the system
 prompt.
 
 ## Running it
@@ -62,7 +62,7 @@ python chat.py
 ## Testing
 
 `harness-tests.json` has six cases: one per route, plus two edge cases the
-project suggested — an ambiguous message that mentions an order but isn't a bug,
+project suggested - an ambiguous message that mentions an order but isn't a bug,
 and a prompt-injection attempt.
 
 ```bash
@@ -84,7 +84,7 @@ The output went to S3 and through a Bedrock Evaluation job using
 **The reasoning traces are deliberate.** Nova Pro emits `<thinking>` blocks
 before it answers, and they show up in the customer-facing output. I tried
 several ways to suppress them, and every instruction strong enough to stop the
-thinking also stopped the tool calls — the assistant would collect all three
+thinking also stopped the tool calls - the assistant would collect all three
 fields correctly and then invent a ticket ID like `TIX-123456` instead of
 calling `create_bug_report`. A DynamoDB scan confirmed nothing had been written.
 The tool call matters much more than tidy output, so I removed the output-format
@@ -95,7 +95,7 @@ names the FAQ entry it is relying on, which makes the grounding visible.
 and `topK: 1`, and the results still differ. Occasionally a response comes back
 containing only the thinking block with nothing after it. Running the same
 prompt five times on its own was clean every time, so it isn't specific to any
-one input — it seems to happen within a batch of successive calls. Adding a
+one input - it seems to happen within a batch of successive calls. Adding a
 delay between calls didn't help either, so it isn't simple rate limiting. I
 couldn't find a prompt-side fix for this one.
 
@@ -114,7 +114,7 @@ email. Rather than have the model invent a number, I added one to the FAQ
 
 ## A note on the rubric
 
-The rubric I was given describes a Bedrock Flow — a flow diagram, Condition node
+The rubric I was given describes a Bedrock Flow - a flow diagram, Condition node
 expressions, Output nodes, a FAQ Prompt node, and `flow-tests.json`. None of
 those exist in the AgentCore version of this project. There is no flow to
 screenshot and no condition node to configure; the routing is entirely in the
@@ -127,9 +127,9 @@ the name both `generate-eval-dataset.py` and the project README use.
 
 ## Evidence
 
-- `project/starter/system_prompt.txt` — the main deliverable
-- `project/starter/harness-tests.json` — test suite, all three routes plus edge cases
-- `project/starter/output_eval_dataset.jsonl` — generated evaluation dataset
+- `project/starter/system_prompt.txt` - the main deliverable
+- `project/starter/harness-tests.json` - test suite, all three routes plus edge cases
+- `project/starter/output_eval_dataset.jsonl` - generated evaluation dataset
 - Screenshots: CloudFormation stack resources, Lambda, AgentCore Gateway and
   harness, DynamoDB table and item, `chat.py` transcripts for all routes, and
   the Bedrock Evaluation results page
