@@ -150,9 +150,25 @@ the name both `generate-eval-dataset.py` and the project README use.
 - `project/starter/system_prompt.txt` - the main deliverable
 - `project/starter/harness-tests.json` - test suite, all three routes plus edge cases
 - `project/starter/output_eval_dataset.jsonl` - generated evaluation dataset
-- Screenshots: CloudFormation stack resources, Lambda, AgentCore Gateway and
-  harness, DynamoDB table and item, `chat.py` transcripts for all routes, and
-  the Bedrock Evaluation results page
+
+Screenshots in `evidence/`:
+
+| File | Shows |
+|------|-------|
+| `01-cloudformation-stacks-list.png` | Tool stack deployed |
+| `02-cloudformation-stack-resources.png` | Table, Lambda, and IAM roles created |
+| `03-lambda-create-bug-report.png` | The bug-report Lambda |
+| `04-agentcore-gateway.png` | Gateway exposing the tool |
+| `05-agentcore-harness.png` | The harness, Ready, Nova Pro pinned |
+| `06-chat-platform-and-other-routes.png` | FAQ-covered, FAQ-uncovered, and other-request replies |
+| `07-chat-bug-report-tool-call.png` | Bug flow with the `[tool call]` line and returned ticket ID |
+| `08-bedrock-evaluation-correctness.png` | Correctness 1.00 over six prompts |
+| `09-dynamodb-table-items.png` | Tickets in the table |
+| `10-dynamodb-item-detail.png` | One ticket with all three collected fields |
+| `11-bedrock-evaluation-prompt-details-1.png` | Per-case scores and judge output, cases 1-5 |
+| `12-bedrock-evaluation-prompt-details-2.png` | Per-case scores and judge output, case 6 |
+
+Also: `EVALUATION.md` (written observation) and `eval-results.jsonl` (raw judge output).
 
 ## Cleanup
 
